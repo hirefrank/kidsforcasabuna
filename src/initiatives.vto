@@ -1,0 +1,19 @@
+---
+layout: layouts/base.vto
+title: Our Initiatives
+initiatives:
+  title: Our Programs
+  items:
+    - title: Community Support
+      description: Supporting local communities through various outreach programs.
+      image: /img/initiatives/community.jpg
+    - title: Education Programs
+      description: Providing educational resources and opportunities for growth.
+      image: /img/initiatives/education.jpg
+    - title: Sustainability Projects
+      description: Working towards a sustainable future for our community.
+      image: /img/initiatives/sustainability.jpg
+---
+<div class="py-12">
+    {{ include "components/initiatives.vto" { title: initiatives.title, initiatives: initiatives.items } }}
+</div>

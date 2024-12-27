@@ -1,0 +1,12 @@
+name: NonProfit Name
+description: A place of positive change, where we work together to create lasting impact in our community.
+contact:
+  email: contact@nonprofit.org
+  phone: (555) 123-4567
+social:
+  - name: Twitter
+    url: "#"
+  - name: Facebook
+    url: "#"
+  - name: Instagram
+    url: "#"
