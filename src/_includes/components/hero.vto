@@ -8,5 +8,11 @@
             {{ cta.text }}
         </a>
         {{ /if }}
+        {{ if secondary_cta }}
+        <a href="{{ secondary_cta.url }}"
+           class="bg-white text-primary-600 px-8 py-3 rounded-md inline-block hover:bg-primary-50 transition-colors ml-4 border border-primary-500 hover:border-primary-700">
+            {{ secondary_cta.text }}
+        </a>
+        {{ /if }}
     </div>
 </section>

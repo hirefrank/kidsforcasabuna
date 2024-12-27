@@ -2,11 +2,14 @@
 layout: layouts/base.vto
 title: Home
 hero:
-  title: Making a Difference
-  description: Join us in our mission to create positive change in our community.
+  title: Empowering Romania's Youth
+  description: Youth-led initiatives transforming young lives across Romania
   cta:
     text: Support Our Cause
     url: /donate
+  secondary_cta:
+    text: Learn More
+    url: /about
 stats:
   - number: 1.2K
     label: People Helped
@@ -16,19 +19,7 @@ stats:
     label: Success Rate
   - number: 24
     label: Team Members
-initiatives:
-  title: Our Initiatives
-  items:
-    - title: Community Support
-      description: Supporting local communities through various outreach programs.
-      image: /img/initiatives/community.jpg
-    - title: Education Programs
-      description: Providing educational resources and opportunities for growth.
-      image: /img/initiatives/education.jpg
-    - title: Sustainability Projects
-      description: Working towards a sustainable future for our community.
-      image: /img/initiatives/sustainability.jpg
 ---
 {{ include "components/hero.vto", hero }}
-{{ include "components/stats.vto" { stats: stats } }}
-{{ include "components/initiatives.vto" { title: initiatives.title, initiatives: initiatives.items } }}
+{{# {{ include "components/stats.vto" { stats: stats } }} #}}
+{{ include "components/initiatives.vto" { title: site.initiatives.title,initiatives: site.initiatives.items } }}

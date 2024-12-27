@@ -1,13 +1,14 @@
 ---
 layout: layouts/base.vto
-title: About Us
 ---
+
 <div class="max-w-4xl mx-auto px-4 py-12">
-    <h1 class="text-4xl font-bold text-gray-900 mb-6">About Us</h1>
+    <h1 class="text-4xl font-bold text-gray-900 mb-6">{{ title }}</h1>
     <div class="prose prose-lg">
-        <p class="text-xl text-gray-600 mb-8">
+        {{# <p class="text-xl text-gray-600 mb-8">
             We are dedicated to making a positive impact in our community through sustainable initiatives and meaningful programs.
-        </p>
+        </p> #}}
+        {{ content }}
         <!-- Add more content as needed -->
     </div>
 </div>

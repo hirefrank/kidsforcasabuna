@@ -1,8 +1,8 @@
-name: NonProfit Name
-description: A place of positive change, where we work together to create lasting impact in our community.
+name: Kids for Casa Buna
+description: A passionate non-profit organization based in New York City, dedicated to enhancing the lives of children in Romania.
 contact:
-  email: contact@nonprofit.org
-  phone: (555) 123-4567
+  email: kidsforcasabuna@gmail.com
+  phone: (917) 655-0440
 social:
   - name: Twitter
     url: "#"
@@ -10,3 +10,17 @@ social:
     url: "#"
   - name: Instagram
     url: "#"
+initiatives:
+  title: Our Initiatives
+  description: >
+    Our work with Casa Buna Charity in Bucharest channels youth energy into meaningful change. We connect American youth leaders with Romanian children, providing essential resources while fostering global citizenship. This dual approach ensures that both communities grow stronger - Casa Buna receives vital support while young American fundraisers develop leadership skills and cultural awareness.
+  items:
+    - title: Casa Buna Support
+      description: Our partnership with Casa Buna Charity in Bucharest provides vital resources to children in need.
+      image: /img/casa-buna-support.png
+    - title: Youth Leadership
+      description: We connect children across regions to develop leadership skills and global awareness.
+      image: /img/youth-leadership.png
+    - title: Building Bridges
+      description: Our projects unite Romanian youth with peers worldwide, fostering empathy and cultural exchange.
+      image: /img/building-bridges.png
