@@ -1,10 +1,6 @@
 import redirects from "lume/middlewares/redirects.ts";
 
 export const definitions = {
-  "/donate": {
-    to: "https://www.paypal.com/donate/?hosted_button_id=RGMKR4SU8LN2S",
-    code: 301,
-  },
   "/email": {
     to: "mailto:kidsforcasabuna@gmail.com",
     code: 301,

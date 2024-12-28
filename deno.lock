@@ -43,6 +43,7 @@
     "npm:markdown-it-deflist@3.0.0": "3.0.0",
     "npm:markdown-it@14.1.0": "14.1.0",
     "npm:meriyah@6.0.3": "6.0.3",
+    "npm:octokit@*": "4.0.2_@octokit+core@6.1.2",
     "npm:postcss-import@16.1.0": "16.1.0_postcss@8.4.49",
     "npm:postcss@8.4.49": "8.4.49",
     "npm:tailwindcss@3.4.16": "3.4.16_postcss@8.4.49"
@@ -212,8 +213,202 @@
         "fastq"
       ]
     },
+    "@octokit/app@15.1.1_@octokit+core@6.1.2": {
+      "integrity": "sha512-fk8xrCSPTJGpyBdBNI+DcZ224dm0aApv4vi6X7/zTmANXlegKV2Td+dJ+fd7APPaPN7R+xttUsj2Fm+AFDSfMQ==",
+      "dependencies": [
+        "@octokit/auth-app",
+        "@octokit/auth-unauthenticated",
+        "@octokit/core",
+        "@octokit/oauth-app",
+        "@octokit/plugin-paginate-rest",
+        "@octokit/types",
+        "@octokit/webhooks"
+      ]
+    },
+    "@octokit/auth-app@7.1.3": {
+      "integrity": "sha512-GZdkOp2kZTIy5dG9oXqvzUAZiPvDx4C/lMlN6yQjtG9d/+hYa7W8WXTJoOrXE8UdfL9A/sZMl206dmtkl9lwVQ==",
+      "dependencies": [
+        "@octokit/auth-oauth-app",
+        "@octokit/auth-oauth-user",
+        "@octokit/request",
+        "@octokit/request-error",
+        "@octokit/types",
+        "toad-cache",
+        "universal-github-app-jwt",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/auth-oauth-app@8.1.1": {
+      "integrity": "sha512-5UtmxXAvU2wfcHIPPDWzVSAWXVJzG3NWsxb7zCFplCWEmMCArSZV0UQu5jw5goLQXbFyOr5onzEH37UJB3zQQg==",
+      "dependencies": [
+        "@octokit/auth-oauth-device",
+        "@octokit/auth-oauth-user",
+        "@octokit/request",
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/auth-oauth-device@7.1.1": {
+      "integrity": "sha512-HWl8lYueHonuyjrKKIup/1tiy0xcmQCdq5ikvMO1YwkNNkxb6DXfrPjrMYItNLyCP/o2H87WuijuE+SlBTT8eg==",
+      "dependencies": [
+        "@octokit/oauth-methods",
+        "@octokit/request",
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/auth-oauth-user@5.1.1": {
+      "integrity": "sha512-rRkMz0ErOppdvEfnemHJXgZ9vTPhBuC6yASeFaB7I2yLMd7QpjfrL1mnvRPlyKo+M6eeLxrKanXJ9Qte29SRsw==",
+      "dependencies": [
+        "@octokit/auth-oauth-device",
+        "@octokit/oauth-methods",
+        "@octokit/request",
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/auth-token@5.1.1": {
+      "integrity": "sha512-rh3G3wDO8J9wSjfI436JUKzHIxq8NaiL0tVeB2aXmG6p/9859aUOAjA9pmSPNGGZxfwmaJ9ozOJImuNVJdpvbA=="
+    },
+    "@octokit/auth-unauthenticated@6.1.0": {
+      "integrity": "sha512-zPSmfrUAcspZH/lOFQnVnvjQZsIvmfApQH6GzJrkIunDooU1Su2qt2FfMTSVPRp7WLTQyC20Kd55lF+mIYaohQ==",
+      "dependencies": [
+        "@octokit/request-error",
+        "@octokit/types"
+      ]
+    },
+    "@octokit/core@6.1.2": {
+      "integrity": "sha512-hEb7Ma4cGJGEUNOAVmyfdB/3WirWMg5hDuNFVejGEDFqupeOysLc2sG6HJxY2etBp5YQu5Wtxwi020jS9xlUwg==",
+      "dependencies": [
+        "@octokit/auth-token",
+        "@octokit/graphql",
+        "@octokit/request",
+        "@octokit/request-error",
+        "@octokit/types",
+        "before-after-hook",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/endpoint@10.1.1": {
+      "integrity": "sha512-JYjh5rMOwXMJyUpj028cu0Gbp7qe/ihxfJMLc8VZBMMqSwLgOxDI1911gV4Enl1QSavAQNJcwmwBF9M0VvLh6Q==",
+      "dependencies": [
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/graphql@8.1.1": {
+      "integrity": "sha512-ukiRmuHTi6ebQx/HFRCXKbDlOh/7xEV6QUXaE7MJEKGNAncGI/STSbOkl12qVXZrfZdpXctx5O9X1AIaebiDBg==",
+      "dependencies": [
+        "@octokit/request",
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/oauth-app@7.1.3": {
+      "integrity": "sha512-EHXbOpBkSGVVGF1W+NLMmsnSsJRkcrnVmDKt0TQYRBb6xWfWzoi9sBD4DIqZ8jGhOWO/V8t4fqFyJ4vDQDn9bg==",
+      "dependencies": [
+        "@octokit/auth-oauth-app",
+        "@octokit/auth-oauth-user",
+        "@octokit/auth-unauthenticated",
+        "@octokit/core",
+        "@octokit/oauth-authorization-url",
+        "@octokit/oauth-methods",
+        "@types/aws-lambda",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/oauth-authorization-url@7.1.1": {
+      "integrity": "sha512-ooXV8GBSabSWyhLUowlMIVd9l1s2nsOGQdlP2SQ4LnkEsGXzeCvbSbCPdZThXhEFzleGPwbapT0Sb+YhXRyjCA=="
+    },
+    "@octokit/oauth-methods@5.1.2": {
+      "integrity": "sha512-C5lglRD+sBlbrhCUTxgJAFjWgJlmTx5bQ7Ch0+2uqRjYv7Cfb5xpX4WuSC9UgQna3sqRGBL9EImX9PvTpMaQ7g==",
+      "dependencies": [
+        "@octokit/oauth-authorization-url",
+        "@octokit/request",
+        "@octokit/request-error",
+        "@octokit/types"
+      ]
+    },
+    "@octokit/openapi-types@22.2.0": {
+      "integrity": "sha512-QBhVjcUa9W7Wwhm6DBFu6ZZ+1/t/oYxqc2tp81Pi41YNuJinbFRx8B133qVOrAaBbF7D/m0Et6f9/pZt9Rc+tg=="
+    },
+    "@octokit/openapi-webhooks-types@8.5.1": {
+      "integrity": "sha512-i3h1b5zpGSB39ffBbYdSGuAd0NhBAwPyA3QV3LYi/lx4lsbZiu7u2UHgXVUR6EpvOI8REOuVh1DZTRfHoJDvuQ=="
+    },
+    "@octokit/plugin-paginate-graphql@5.2.4_@octokit+core@6.1.2": {
+      "integrity": "sha512-pLZES1jWaOynXKHOqdnwZ5ULeVR6tVVCMm+AUbp0htdcyXDU95WbkYdU4R2ej1wKj5Tu94Mee2Ne0PjPO9cCyA==",
+      "dependencies": [
+        "@octokit/core"
+      ]
+    },
+    "@octokit/plugin-paginate-rest@11.3.6_@octokit+core@6.1.2": {
+      "integrity": "sha512-zcvqqf/+TicbTCa/Z+3w4eBJcAxCFymtc0UAIsR3dEVoNilWld4oXdscQ3laXamTszUZdusw97K8+DrbFiOwjw==",
+      "dependencies": [
+        "@octokit/core",
+        "@octokit/types"
+      ]
+    },
+    "@octokit/plugin-rest-endpoint-methods@13.2.6_@octokit+core@6.1.2": {
+      "integrity": "sha512-wMsdyHMjSfKjGINkdGKki06VEkgdEldIGstIEyGX0wbYHGByOwN/KiM+hAAlUwAtPkP3gvXtVQA9L3ITdV2tVw==",
+      "dependencies": [
+        "@octokit/core",
+        "@octokit/types"
+      ]
+    },
+    "@octokit/plugin-retry@7.1.2_@octokit+core@6.1.2": {
+      "integrity": "sha512-XOWnPpH2kJ5VTwozsxGurw+svB2e61aWlmk5EVIYZPwFK5F9h4cyPyj9CIKRyMXMHSwpIsI3mPOdpMmrRhe7UQ==",
+      "dependencies": [
+        "@octokit/core",
+        "@octokit/request-error",
+        "@octokit/types",
+        "bottleneck"
+      ]
+    },
+    "@octokit/plugin-throttling@9.3.2_@octokit+core@6.1.2": {
+      "integrity": "sha512-FqpvcTpIWFpMMwIeSoypoJXysSAQ3R+ALJhXXSG1HTP3YZOIeLmcNcimKaXxTcws+Sh6yoRl13SJ5r8sXc1Fhw==",
+      "dependencies": [
+        "@octokit/core",
+        "@octokit/types",
+        "bottleneck"
+      ]
+    },
+    "@octokit/request-error@6.1.5": {
+      "integrity": "sha512-IlBTfGX8Yn/oFPMwSfvugfncK2EwRLjzbrpifNaMY8o/HTEAFqCA1FZxjD9cWvSKBHgrIhc4CSBIzMxiLsbzFQ==",
+      "dependencies": [
+        "@octokit/types"
+      ]
+    },
+    "@octokit/request@9.1.3": {
+      "integrity": "sha512-V+TFhu5fdF3K58rs1pGUJIDH5RZLbZm5BI+MNF+6o/ssFNT4vWlCh/tVpF3NxGtP15HUxTTMUbsG5llAuU2CZA==",
+      "dependencies": [
+        "@octokit/endpoint",
+        "@octokit/request-error",
+        "@octokit/types",
+        "universal-user-agent"
+      ]
+    },
+    "@octokit/types@13.6.2": {
+      "integrity": "sha512-WpbZfZUcZU77DrSW4wbsSgTPfKcp286q3ItaIgvSbBpZJlu6mnYXAkjZz6LVZPXkEvLIM8McanyZejKTYUHipA==",
+      "dependencies": [
+        "@octokit/openapi-types"
+      ]
+    },
+    "@octokit/webhooks-methods@5.1.0": {
+      "integrity": "sha512-yFZa3UH11VIxYnnoOYCVoJ3q4ChuSOk2IVBBQ0O3xtKX4x9bmKb/1t+Mxixv2iUhzMdOl1qeWJqEhouXXzB3rQ=="
+    },
+    "@octokit/webhooks@13.4.1": {
+      "integrity": "sha512-I5YPUtfWidh+OzyrlDahJsUpkpGK0kCTmDRbuqGmlCUzOtxdEkX3R4d6Cd08ijQYwkVXQJanPdbKuZBeV2NMaA==",
+      "dependencies": [
+        "@octokit/openapi-webhooks-types",
+        "@octokit/request-error",
+        "@octokit/webhooks-methods"
+      ]
+    },
     "@pkgjs/parseargs@0.11.0": {
       "integrity": "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="
+    },
+    "@types/aws-lambda@8.10.145": {
+      "integrity": "sha512-dtByW6WiFk5W5Jfgz1VM+YPA21xMXTuSFoLYIDY0L44jDLLflVPtZkYuu3/YxpGcvjzKFBZLU+GyKjR0HOYtyw=="
     },
     "@types/estree@1.0.6": {
       "integrity": "sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw=="
@@ -264,8 +459,14 @@
     "balanced-match@1.0.2": {
       "integrity": "sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw=="
     },
+    "before-after-hook@3.0.2": {
+      "integrity": "sha512-Nik3Sc0ncrMK4UUdXQmAnRtzmNQTAAXmXIopizwZ1W1t8QmfJj+zL4OA2I7XPTPW5z5TDqv4hRo/JzouDJnX3A=="
+    },
     "binary-extensions@2.3.0": {
       "integrity": "sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw=="
+    },
+    "bottleneck@2.19.5": {
+      "integrity": "sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw=="
     },
     "brace-expansion@2.0.1": {
       "integrity": "sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==",
@@ -562,6 +763,21 @@
     "object-hash@3.0.0": {
       "integrity": "sha512-RSn9F68PjH9HqtltsSnqYC1XXoWe9Bju5+213R98cNGttag9q9yAOTzdbsqvIa7aNm5WffBZFpWYr2aWrklWAw=="
     },
+    "octokit@4.0.2_@octokit+core@6.1.2": {
+      "integrity": "sha512-wbqF4uc1YbcldtiBFfkSnquHtECEIpYD78YUXI6ri1Im5OO2NLo6ZVpRdbJpdnpZ05zMrVPssNiEo6JQtea+Qg==",
+      "dependencies": [
+        "@octokit/app",
+        "@octokit/core",
+        "@octokit/oauth-app",
+        "@octokit/plugin-paginate-graphql",
+        "@octokit/plugin-paginate-rest",
+        "@octokit/plugin-rest-endpoint-methods",
+        "@octokit/plugin-retry",
+        "@octokit/plugin-throttling",
+        "@octokit/request-error",
+        "@octokit/types"
+      ]
+    },
     "package-json-from-dist@1.0.1": {
       "integrity": "sha512-UEZIS3/by4OC8vL3P2dTXRETpebLI2NiI5vIrjaD/5UtrkFX/tNbwjTSRAGC/+7CAo2pIcBaRgWmcBBHcsaCIw=="
     },
@@ -786,6 +1002,9 @@
         "is-number"
       ]
     },
+    "toad-cache@3.7.0": {
+      "integrity": "sha512-/m8M+2BJUpoJdgAHoG+baCwBT+tf2VraSfkBgl0Y00qIWt41DJ8R5B8nsEw0I58YwF5IZH6z24/2TobDKnqSWw=="
+    },
     "ts-interface-checker@0.1.13": {
       "integrity": "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="
     },
@@ -794,6 +1013,12 @@
     },
     "uc.micro@2.1.0": {
       "integrity": "sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A=="
+    },
+    "universal-github-app-jwt@2.2.0": {
+      "integrity": "sha512-G5o6f95b5BggDGuUfKDApKaCgNYy2x7OdHY0zSMF081O0EJobw+1130VONhrA7ezGSV2FNOGyM+KQpQZAr9bIQ=="
+    },
+    "universal-user-agent@7.0.2": {
+      "integrity": "sha512-0JCqzSKnStlRRQfCdowvqy3cy0Dvtlb8xecj/H8JFZuCze4rwjPZQOgvFvn0Ws/usCHQFGpyr+pB9adaGwXn4Q=="
     },
     "update-browserslist-db@1.1.1_browserslist@4.24.3": {
       "integrity": "sha512-R8UzCaa9Az+38REPiJ1tXlImTJXlVfgHZsglwBD/k6nj76ctsH1E3q4doGrukiLQd3sGQYu56r5+lo5r94l29A==",
@@ -833,9 +1058,11 @@
     }
   },
   "remote": {
+    "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/adapters/lume.ts": "ce2f4c68b1461bd9f208c31c61196fda8d60086cac441af1e7cde10c3683555d",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/cms.ts": "0fcf7ab9ddcc90637c915052e6ab5375d11d49bf827c59c3b6c1fcc3aa408c1a",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/collection.ts": "0c95ac5d5e52e110453b40fb494ac7ae3179f6f775e9a5a6e708e9e86027c435",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/document.ts": "b27c476b51b963443ed897fc474cf8b75cc8b4e40c6cf32e21af8d4117996c9a",
+    "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/git.ts": "ebcb06df6c89ad74dc3194d78c5a6bb88c54305e8f79b177c1f3151296760e98",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/routes/auth.ts": "b9a5c5b77169a3c5be46aa8dba15a187ed1dc2f6c9c8fb71ba35782e39cd2044",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/routes/collection.ts": "9383757c54cee6b0029291cb8334204fdb79c989e43bd11c6552e602e8156678",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/core/routes/document.ts": "5f9b01893b4f435dd64d28d16c647b3ed7373fcc56f6a658420850348198109f",
@@ -865,6 +1092,7 @@
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/fields/core.ts": "57f007bc90c5a72efcd5b7cf5c446032229b09ea793e1859d48957ae55658b2e",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/mod.ts": "8c0e794889d779e84137f4d3b9673f5a5a1083777afdffa571d0a7af54ddceac",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/fs.ts": "2d45319ce0ece128c6a86dbff4f18d392d07a641c0bf1b8d616b0ae4d63fec92",
+    "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/github.ts": "d975c920e13b20c8db2763dbec5b843000927d91ed103ceb38243b04befd8618",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/transformers/front_matter.ts": "d0809292ae1ccb367c7e7852a2b6bd383e4da531ff95da4a640afa181412fe0d",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/transformers/json.ts": "eb5d664be2042cc266a4fc737bbeeb1b4eb586e2beab8ca1965b07c2b066ee68",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/transformers/mod.ts": "d828136358c98c93b45b5a1f1c7f383f9788ec47ede04bcb03de8ee0b19c2b3c",
@@ -991,6 +1219,7 @@
     "https://deno.land/x/lume@v2.4.3/cli/build.ts": "a3acda3c702d6a51a8fe65ea3abc17813deea0db71e442de6120a747f56a2466",
     "https://deno.land/x/lume@v2.4.3/cli/build_worker.ts": "a96cb2f66e28a91e5e2e8c231b10942d03528eb6971ed6bf679828b223323dd6",
     "https://deno.land/x/lume@v2.4.3/cli/cms.ts": "7f3f46c3353661a7679926d0ddcfe3e596f3c97ad2de7f535bde5906e42c3f5a",
+    "https://deno.land/x/lume@v2.4.3/cli/cms_worker.ts": "d1941da4fa63ab025812e9565818f976e53015aac8e06149f6dbab869b836f75",
     "https://deno.land/x/lume@v2.4.3/cli/create.ts": "f340056e3b01a61007f82b47a174ede55df2d80d343e492a3853d44007bb8fc6",
     "https://deno.land/x/lume@v2.4.3/cli/missing_worker_apis.ts": "70625ded7fee5de7d215e0829ce8dc4bb7060f6a496c09db880ebaec8b3efb92",
     "https://deno.land/x/lume@v2.4.3/cli/run.ts": "27e7c84c2bcadc3aa4ca4fbad02330f33000dca9a2ef41780bad3676606bc029",

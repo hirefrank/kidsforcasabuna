@@ -1,25 +1,6 @@
 ---
 layout: layouts/base.vto
 title: Home
-hero:
-  title: Empowering Romania's Youth
-  description: Youth-led initiatives transforming young lives across Romania
-  cta:
-    text: Support Our Cause
-    url: /donate
-  secondary_cta:
-    text: Learn More
-    url: /about
-stats:
-  - number: 1.2K
-    label: People Helped
-  - number: 15
-    label: Programs
-  - number: 89%
-    label: Success Rate
-  - number: 24
-    label: Team Members
 ---
-{{ include "components/hero.vto", hero }}
-{{# {{ include "components/stats.vto" { stats: stats } }} #}}
-{{ include "components/initiatives.vto" { title: site.initiatives.title,initiatives: site.initiatives.items } }}
+{{ include "components/hero.vto" { title: hero.title, description: hero.description, cta: hero.cta, secondary_cta: hero.secondary_cta } }}
+{{ include "components/initiatives.vto" { title: initiatives.title, description: initiatives.description, initiatives: initiatives.items } }}

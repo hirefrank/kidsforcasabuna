@@ -50,6 +50,6 @@ export default function () {
         },
       }))
       .use(onDemand())
-      .copy("static", "./");
+      .copy("img", "./img");
   }
 }

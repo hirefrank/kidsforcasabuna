@@ -15,7 +15,7 @@
                     {{ for item of nav.main }}
                     <a href="{{ item.url }}" class="text-gray-600 hover:text-gray-900">{{ item.title }}</a>
                     {{ /for }}
-                    <a href="/donate" class="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition-colors">
+                    <a href="{{ site.donate_url }}" class="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition-colors">
                         Donate
                     </a>
                 </div>
