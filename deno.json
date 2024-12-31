@@ -8,7 +8,7 @@
     "build": "deno task lume",
     "serve": "deno task lume -s",
     "cms": "deno task lume cms",
-    "production": "deno run -A _cms.serve.ts"
+    "production": "deno serve -A _cms.serve.ts"
   },
   "compilerOptions": {
     "types": [

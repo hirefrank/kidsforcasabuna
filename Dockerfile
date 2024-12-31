@@ -11,7 +11,7 @@ COPY . .
 #RUN mkdir -p /app/data
 
 # Expose the port the app runs on
-EXPOSE 3000
+EXPOSE 8000
 
 # Cache the dependencies as a layer
 RUN deno task build
