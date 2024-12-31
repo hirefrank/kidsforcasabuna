@@ -16,4 +16,7 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 COPY ./ .
 
+RUN deno cache ./src/_cms.serve.ts
+RUN deno cache ./src/_cms.lume.ts
+
 ENTRYPOINT ["deno", "task", "production"]
