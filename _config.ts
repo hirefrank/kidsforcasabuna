@@ -1,6 +1,6 @@
 import lume from "lume/mod.ts";
 import plugins from "./src/_lib/plugins.ts";
-import { redirects, cacheBusting, notFound } from "./src/_lib/middleware.ts";
+import { redirects, notFound } from "./src/_lib/middleware.ts";
 
 const site = lume({
   src: "./src",
@@ -9,12 +9,11 @@ const site = lume({
     middlewares: [
         redirects,
         notFound(),
-        cacheBusting(),
     ],
   },
 });
 
-site.data('cacheBusterVersion', `v${Date.now()}`);
+site.data('cacheBusterVersion', '');
 
 site.data("site", {
   title: "Frank Harris",

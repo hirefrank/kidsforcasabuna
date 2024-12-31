@@ -5,7 +5,7 @@ import { redirects, notFound, cacheBusting } from "./src/_lib/middleware.ts";
 
 const server = new Server({
   root: `${Deno.cwd()}/_site`,
-  port: 8000,
+  port: 3000,
 });
 
 server.use(redirects);
@@ -15,4 +15,4 @@ server.use(cacheBusting());
 
 server.start();
 
-console.log("Listening on http://localhost:8000");
+console.log("Listening on http://localhost:3000");
