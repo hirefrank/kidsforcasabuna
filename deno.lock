@@ -1091,6 +1091,8 @@
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/deps/std.ts": "ee9b9abaacd7abe9d7fefb2601913100cf89bb30f8b86876eb7914da1db84d0f",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/fields/core.ts": "57f007bc90c5a72efcd5b7cf5c446032229b09ea793e1859d48957ae55658b2e",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/mod.ts": "8c0e794889d779e84137f4d3b9673f5a5a1083777afdffa571d0a7af54ddceac",
+    "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/server/actions/git.ts": "6ada9c0cd26e2dcdb83ad5611d506ce42aaa3c44c6f5a3f2b8fb5271c9b10ad7",
+    "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/server/proxy.ts": "a27c04f9c47630ecec9056c156808698f4ad1299115ff946d87d1cb01e0363db",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/fs.ts": "2d45319ce0ece128c6a86dbff4f18d392d07a641c0bf1b8d616b0ae4d63fec92",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/github.ts": "d975c920e13b20c8db2763dbec5b843000927d91ed103ceb38243b04befd8618",
     "https://cdn.jsdelivr.net/gh/lumeland/cms@v0.7.7/storage/transformers/front_matter.ts": "d0809292ae1ccb367c7e7852a2b6bd383e4da531ff95da4a640afa181412fe0d",
