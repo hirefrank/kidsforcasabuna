@@ -7,7 +7,6 @@ ENV TZ=America/New_York
 WORKDIR /app
 
 EXPOSE 8000
-EXPOSE 3000
 
 RUN curl -fsSL https://deno.land/install.sh | sh
 
