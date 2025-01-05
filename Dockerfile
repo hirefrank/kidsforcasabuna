@@ -30,16 +30,11 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 # Copy the local repository into the Docker image
 COPY ./ .
 
-# Add script to setup SSH key at runtime and make it executable
-COPY setup-ssh.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/setup-ssh.sh
-
-# Initialize a new Git repository
+# Initialize git repository
 RUN git init && \
-    git remote add origin git@github.com:hirefrank/kidsforcasabuna.git && \
-    git fetch
+    git remote add origin git@github.com:hirefrank/kidsforcasabuna.git
 
 RUN deno cache ./_cms.serve.ts
 RUN deno cache ./_cms.lume.ts
 
-ENTRYPOINT ["/usr/local/bin/setup-ssh.sh"]
+ENTRYPOINT ["deno", "task", "production"]
