@@ -47,20 +47,20 @@ if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
     mkdir -p /root/.ssh\n\
     chmod 700 /root/.ssh\n\
     \n\
-    echo "$SSH_PRIVATE_KEY" | tr -d \047\\r\047 > /root/.ssh/id_rsa\n\
-    chmod 600 /root/.ssh/id_rsa\n\
+    echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
+    chmod 600 /root/.ssh/id_ed25519\n\
     \n\
     echo "Generating public key..."\n\
-    ssh-keygen -y -f /root/.ssh/id_rsa > /root/.ssh/id_rsa.pub\n\
+    ssh-keygen -y -f /root/.ssh/id_ed25519 > /root/.ssh/id_ed25519.pub\n\
     \n\
     echo "Contents of public key:"\n\
-    cat /root/.ssh/id_rsa.pub\n\
+    cat /root/.ssh/id_ed25519.pub\n\
     \n\
     echo "Adding GitHub to known hosts..."\n\
     ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts\n\
     \n\
     echo "Testing SSH connection to GitHub..."\n\
-    ssh -vT git@github.com || echo "GitHub SSH connection test failed"\n\
+    ssh -vT -i /root/.ssh/id_ed25519 git@github.com || echo "GitHub SSH connection test failed"\n\
     \n\
     echo "Listing SSH directory contents:"\n\
     ls -la /root/.ssh\n\
