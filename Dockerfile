@@ -37,4 +37,15 @@ RUN git init && \
 RUN deno cache ./_cms.serve.ts
 RUN deno cache ./_cms.lume.ts
 
-ENTRYPOINT ["deno", "task", "production"]
+# Create the setup-ssh script inline
+RUN echo '#!/bin/sh\n\
+if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
+    echo "$SSH_PRIVATE_KEY" | tr -d \047\\r\047 > /root/.ssh/id_rsa\n\
+    chmod 600 /root/.ssh/id_rsa\n\
+    git fetch\n\
+fi\n\
+\n\
+exec deno task production' > /usr/local/bin/setup-ssh.sh && \
+    chmod +x /usr/local/bin/setup-ssh.sh
+
+ENTRYPOINT ["/usr/local/bin/setup-ssh.sh"]
