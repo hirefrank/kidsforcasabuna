@@ -7,7 +7,6 @@ ENV TZ=America/New_York
 WORKDIR /app
 
 EXPOSE 8000
-EXPOSE 3000
 
 RUN curl -fsSL https://deno.land/install.sh | sh
 
@@ -16,7 +15,7 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 
 COPY ./ .
 
-RUN deno cache ./src/_cms.serve.ts
-RUN deno cache ./src/_cms.lume.ts
+RUN deno cache ./_cms.serve.ts
+RUN deno cache ./_cms.lume.ts
 
 ENTRYPOINT ["deno", "task", "production"]
