@@ -39,13 +39,37 @@ RUN deno cache ./_cms.lume.ts
 
 # Create the setup-ssh script inline
 RUN echo '#!/bin/sh\n\
+set -x\n\
+echo "Starting setup-ssh.sh script"\n\
+\n\
 if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
+    echo "SSH private key provided. Setting up SSH..."\n\
+    mkdir -p /root/.ssh\n\
+    chmod 700 /root/.ssh\n\
+    \n\
     echo "$SSH_PRIVATE_KEY" | tr -d \047\\r\047 > /root/.ssh/id_rsa\n\
     chmod 600 /root/.ssh/id_rsa\n\
-    git fetch\n\
+    \n\
+    echo "Generating public key..."\n\
+    ssh-keygen -y -f /root/.ssh/id_rsa > /root/.ssh/id_rsa.pub\n\
+    \n\
+    echo "Contents of public key:"\n\
+    cat /root/.ssh/id_rsa.pub\n\
+    \n\
+    echo "Adding GitHub to known hosts..."\n\
+    ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts\n\
+    \n\
+    echo "Testing SSH connection to GitHub..."\n\
+    ssh -vT git@github.com || echo "GitHub SSH connection test failed"\n\
+    \n\
+    echo "Listing SSH directory contents:"\n\
+    ls -la /root/.ssh\n\
+else\n\
+    echo "No SSH private key provided. Skipping SSH setup."\n\
 fi\n\
 \n\
+echo "Executing production task..."\n\
 exec deno task production' > /usr/local/bin/setup-ssh.sh && \
-    chmod +x /usr/local/bin/setup-ssh.sh
+chmod +x /usr/local/bin/setup-ssh.sh
 
 ENTRYPOINT ["/usr/local/bin/setup-ssh.sh"]
