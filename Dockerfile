@@ -8,7 +8,7 @@ ARG GIT_REPO_URL="git@github.com:hirefrank/kidsforcasabuna.git"
 ARG TZ="America/New_York"
 
 # Install required packages
-RUN apt update -y && apt install -y git curl tzdata unzip openssh-client cron supervisor && \
+RUN apt update -y && apt install -y git curl tzdata unzip openssh-client cron supervisor procps && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Set up Git configuration
