@@ -10,9 +10,9 @@ const cms = lumeCMS({
   site: {
     name: "Kids for Casa Buna CMS",
     description: "Welcome to your site's content management dashboard. Manage and update your website content from one central location.",
-    url: "https://kidsforcasabuna.deno.dev",
+    url: "https://kidsforcasabuna.com",
     body: `
-    <p>Please note: Content updates may take up to 8 minutes to be visible on your live site.</p>
+    <p>Please note: Content updates may take up to 5-8 minutes to be visible on your live site.</p>
     `,
   },
   // auth: {
@@ -160,6 +160,35 @@ cms.document({
       ],
     },
   ],
+});
+
+cms.collection({
+  name: "Blog Posts",
+  description: "Manage and edit your blog posts",
+  store: "src:blog/*.md",
+  fields: [
+    "title: text!",
+    {
+      name: "author",
+      type: "text",
+      value: "Ionela Thomas",
+      attributes: {
+        required: true,
+      },
+    },
+    "excerpt: textarea!",
+    {
+      name: "date",
+      type: "datetime",
+      value: new Date(),
+      attributes: {
+        required: true,
+      },
+    },
+    "content: markdown",
+    "tags: list",
+  ],
+  nameField: "title",
 });
 
 export default cms;

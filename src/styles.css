@@ -9,3 +9,7 @@
 .prose h2 {
   @apply text-2xl font-bold text-gray-900 mb-4;
 }
+
+.prose a, .link {
+  @apply text-primary-500 hover:text-primary-700 transition-colors underline;
+}
