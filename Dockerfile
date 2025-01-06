@@ -60,8 +60,8 @@ else\n\
     mkdir -p /root/.ssh && chmod 700 /root/.ssh\n\
     echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
     chmod 600 /root/.ssh/id_ed25519\n\
-    echo "Testing SSH connection..."\n\
-    GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git\n\
+    # echo "Testing SSH connection..."\n\
+    # GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote YOUR_REPO_URL\n\
 fi\n\
 exec deno task production' > /usr/local/bin/entrypoint.sh && chmod +x /usr/local/bin/entrypoint.sh
 
