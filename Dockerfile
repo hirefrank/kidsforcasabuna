@@ -53,17 +53,37 @@ fi\n\
 exec deno task production' > /usr/local/bin/setup-ssh.sh && chmod +x /usr/local/bin/setup-ssh.sh
 
 # Create supervisor configuration inline
-RUN echo "[supervisord]\n\
+RUN echo "[unix_http_server]\n\
+file=/dev/shm/supervisor.sock\n\
+chmod=0700\n\
+\n\
+[supervisord]\n\
 nodaemon=true\n\
 user=root\n\
 \n\
 [program:cron]\n\
 command=cron -f\n\
+priority=1\n\
+autostart=true\n\
+autorestart=true\n\
+stdout_logfile=/dev/stdout\n\
+stdout_logfile_maxbytes=0\n\
+stderr_logfile=/dev/stderr\n\
+stderr_logfile_maxbytes=0\n\
 \n\
 [program:LumeCMS]\n\
+priority=10\n\
+autostart=true\n\
+autorestart=true\n\
 command=/usr/local/bin/setup-ssh.sh\n\
 stdout_logfile=/var/log/supervisor/LumeCMS.log\n\
-stderr_logfile=/var/log/supervisor/LumeCMS_err.log" > /etc/supervisor/conf.d/supervisord.conf
+stderr_logfile=/var/log/supervisor/LumeCMS_err.log\n\
+\n\
+[rpcinterface:supervisor]\n\
+supervisor.rpcinterface_factory = supervisor.rpcinterface:make_main_rpcinterface\n\
+\n\
+[supervisorctl]\n\
+serverurl=unix:///dev/shm/supervisor.sock" > /etc/supervisor/conf.d/supervisord.conf
 
 
 # Create the CPU monitoring script
