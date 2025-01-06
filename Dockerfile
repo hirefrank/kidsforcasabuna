@@ -66,15 +66,15 @@ command=cron -f\n\
 priority=1\n\
 autostart=true\n\
 autorestart=true\n\
-stdout_logfile=/dev/stdout\n\
-stdout_logfile_maxbytes=0\n\
-stderr_logfile=/dev/stderr\n\
-stderr_logfile_maxbytes=0\n\
+startretries=3\n\
+stdout_logfile=/var/log/supervisor/cron_out.log\n\
+stderr_logfile=/var/log/supervisor/cron_err.log\n\
 \n\
 [program:LumeCMS]\n\
 priority=10\n\
 autostart=true\n\
 autorestart=true\n\
+startretries=3\n\
 command=/usr/local/bin/setup-ssh.sh\n\
 stdout_logfile=/var/log/supervisor/LumeCMS.log\n\
 stderr_logfile=/var/log/supervisor/LumeCMS_err.log\n\
@@ -89,9 +89,15 @@ serverurl=unix:///dev/shm/supervisor.sock" > /etc/supervisor/conf.d/supervisord.
 # Create the CPU monitoring script
 RUN script_path="/cron_cpu.sh" && \
     echo '#!/usr/bin/env bash' > $script_path && \
-    echo 'CPU_USAGE=$(ps -eo pcpu | awk "{sum+=$1} END {print int(sum)}")' >> $script_path && \
-    echo 'if [ "$CPU_USAGE" -gt "99" ]; then\n supervisorctl restart LumeCMS\nfi' >> $script_path && \
+    echo 'CPU_USAGE_THRESHOLD=99' >> $script_path && \
+    echo 'CPU_USAGE=$(ps -eo pcpu | awk "NR>1 {sum+=\$1} END {printf \\"%d\\n\\", sum}")' >> $script_path && \
+    echo 'echo "$(date): CPU usage is $CPU_USAGE%" >> /var/log/cpu_monitor.log' >> $script_path && \
+    echo 'if [ "$CPU_USAGE" -gt "$CPU_USAGE_THRESHOLD" ]; then' >> $script_path && \
+    echo '  echo "$(date): CPU usage exceeded threshold ($CPU_USAGE%). Restarting LumeCMS." >> /var/log/cpu_monitor.log' >> $script_path && \
+    echo '  supervisorctl restart LumeCMS' >> $script_path && \
+    echo 'fi' >> $script_path && \
     chmod +x $script_path
+
 
 # Setup the cron job to run the script
 RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
