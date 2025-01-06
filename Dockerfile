@@ -1,22 +1,22 @@
 # Use a slim base image
 FROM debian:stable-slim
 
-# Install required packages
-RUN apt update -y && apt install -y git curl tzdata unzip openssh-client && \
-    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
-# Set up Git configuration (optional)
+# Arguments
 ARG GIT_USER_EMAIL="fcharris+lumecms@email.com"
 ARG GIT_USER_NAME="LumeCMS"
+ARG GIT_REPO_URL="git@github.com:hirefrank/kidsforcasabuna.git"
+ARG TZ="America/New_York"
+
+# Install required packages
+RUN apt update -y && apt install -y git curl tzdata unzip openssh-client cron supervisor && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+# Set up Git configuration
 RUN git config --global user.email "$GIT_USER_EMAIL" && \
     git config --global user.name "$GIT_USER_NAME"
 
-# Configure SSH
-RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh && \
-    ssh-keyscan github.com > /root/.ssh/known_hosts
-
 # Environment configuration
-ENV TZ=America/New_York
+ENV TZ=$TZ
 WORKDIR /app
 
 # Install Deno
@@ -27,10 +27,14 @@ ENV PATH="$DENO_INSTALL/bin:$PATH"
 # Copy the local repository into the Docker image
 COPY ./ .
 
+# Configure SSH
+RUN mkdir -p /root/.ssh && chmod 700 /root/.ssh && \
+    ssh-keyscan github.com > /root/.ssh/known_hosts
+
 # Initialize git repository and pre-cache Deno dependencies
 RUN git init && \
     git remote remove origin || true && \
-    git remote add origin git@github.com:hirefrank/kidsforcasabuna.git && \
+    git remote add origin $GIT_REPO_URL && \
     deno cache ./_cms.serve.ts && \
     deno cache ./_cms.lume.ts
 
@@ -53,11 +57,35 @@ fi\n\
 echo "Executing production task..."\n\
 exec deno task production' > /usr/local/bin/setup-ssh.sh && chmod +x /usr/local/bin/setup-ssh.sh
 
-# Healthcheck for the container
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD curl -f http://localhost:8000 || exit 1
+# Create supervisor configuration inline
+RUN echo "[supervisord]\n\
+nodaemon=true\n\
+\n\
+[program:cron]\n\
+command=cron -f\n\
+\n\
+[program:LumeCMS]\n\
+command=/usr/local/bin/setup-ssh.sh\n" > /etc/supervisor/conf.d/supervisord.conf
 
+# Create the CPU monitoring script
+RUN script_path="/cron_cpu.sh" && \
+    echo '#!/usr/bin/env bash' > $script_path && \
+    echo 'CPU_USAGE_THRESHOLD=99' >> $script_path && \
+    echo 'CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\\([0-9.]*\\)%* id.*/\\1/" | awk "{printf \\"%.0f\\", 100 - \$1}")' >> $script_path && \
+    echo 'if [ "$CPU_USAGE" -gt "$CPU_USAGE_THRESHOLD" ]; then' >> $script_path && \
+    echo '  systemctl restart lumecms' >> $script_path && \
+    echo '  systemctl restart caddy' >> $script_path && \
+    echo 'fi' >> $script_path && \
+    chmod +x $script_path
+
+# Setup the cron job to run the script
+RUN crontab -l > /tmp/mycron || true && \
+    echo "*/5 * * * * /cron_cpu.sh" >> /tmp/mycron && \
+    crontab /tmp/mycron && \
+    rm /tmp/mycron
+
+# Expose ports
 EXPOSE 8000 3000
 
-# Entrypoint for the container
-ENTRYPOINT ["/usr/local/bin/setup-ssh.sh"]
+# Use supervisor to manage processes
+CMD ["supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
