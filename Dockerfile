@@ -43,29 +43,15 @@ set -x\n\
 echo "Starting setup-ssh.sh script"\n\
 \n\
 if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
-    echo "SSH private key provided. Setting up SSH..."\n\
     mkdir -p /root/.ssh\n\
     chmod 700 /root/.ssh\n\
     \n\
-    # Decode base64 and write the key\n\
-    echo "$SSH_PRIVATE_KEY" | base64 -d > /root/.ssh/id_ed25519\n\
+    # Write the private key directly\n\
+    echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
     chmod 600 /root/.ssh/id_ed25519\n\
     \n\
-    # Generate public key\n\
-    ssh-keygen -y -f /root/.ssh/id_ed25519 > /root/.ssh/id_ed25519.pub\n\
-    \n\
-    echo "Contents of public key:"\n\
-    cat /root/.ssh/id_ed25519.pub\n\
-    \n\
-    echo "Adding GitHub to known hosts..."\n\
-    ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts\n\
-    \n\
-    echo "Testing SSH connection to GitHub..."\n\
-    ssh-keygen -l -f /root/.ssh/id_ed25519\n\
-    GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git || echo "GitHub SSH connection test failed"\n\
-    \n\
-    echo "Listing SSH directory contents:"\n\
-    ls -la /root/.ssh\n\
+    # Test SSH connection\n\
+    GIT_SSH_COMMAND="ssh -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git || echo "GitHub SSH connection test failed"\n\
 else\n\
     echo "No SSH private key provided. Skipping SSH setup."\n\
 fi\n\
