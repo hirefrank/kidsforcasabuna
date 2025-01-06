@@ -38,51 +38,39 @@ RUN git init && \
     deno cache ./_cms.serve.ts && \
     deno cache ./_cms.lume.ts
 
-# Inline SSH setup script without base64 decoding
+# Inline SSH setup script
 RUN echo '#!/bin/sh\n\
 set -ex\n\
-echo "Starting setup-ssh.sh script"\n\
 if [ -z "$SSH_PRIVATE_KEY" ]; then\n\
-    echo "No SSH private key provided. Skipping SSH setup."\n\
-    exit 1\n\
+    echo "No SSH private key provided. Proceeding without GitHub access."\n\
+else\n\
+    mkdir -p /root/.ssh && chmod 700 /root/.ssh\n\
+    echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
+    chmod 600 /root/.ssh/id_ed25519\n\
+    echo "Testing SSH connection..."\n\
+    GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git\n\
 fi\n\
-mkdir -p /root/.ssh && chmod 700 /root/.ssh\n\
-echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
-chmod 600 /root/.ssh/id_ed25519\n\
-echo "Testing SSH connection..."\n\
-if ! GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git; then\n\
-    echo "GitHub SSH connection test failed"\n\
-    exit 1\n\
-fi\n\
-echo "Executing production task..."\n\
 exec deno task production' > /usr/local/bin/setup-ssh.sh && chmod +x /usr/local/bin/setup-ssh.sh
 
 # Create supervisor configuration inline
 RUN echo "[supervisord]\n\
 nodaemon=true\n\
-\n\
 [program:cron]\n\
 command=cron -f\n\
-\n\
 [program:LumeCMS]\n\
-command=/usr/local/bin/setup-ssh.sh\n" > /etc/supervisor/conf.d/supervisord.conf
+command=/usr/local/bin/setup-ssh.sh\n\
+stdout_logfile=/var/log/supervisor/LumeCMS.log\n\
+stderr_logfile=/var/log/supervisor/LumeCMS_err.log" > /etc/supervisor/conf.d/supervisord.conf
 
 # Create the CPU monitoring script
 RUN script_path="/cron_cpu.sh" && \
     echo '#!/usr/bin/env bash' > $script_path && \
-    echo 'CPU_USAGE_THRESHOLD=99' >> $script_path && \
-    echo 'CPU_USAGE=$(top -bn1 | grep "Cpu(s)" | sed "s/.*, *\\([0-9.]*\\)%* id.*/\\1/" | awk "{printf \\"%.0f\\", 100 - \$1}")' >> $script_path && \
-    echo 'if [ "$CPU_USAGE" -gt "$CPU_USAGE_THRESHOLD" ]; then' >> $script_path && \
-    echo '  systemctl restart lumecms' >> $script_path && \
-    echo '  systemctl restart caddy' >> $script_path && \
-    echo 'fi' >> $script_path && \
+    echo 'CPU_USAGE=$(ps -eo pcpu | awk "{sum+=$1} END {print int(sum)}")' >> $script_path && \
+    echo 'if [ "$CPU_USAGE" -gt "99" ]; then\n supervisorctl restart LumeCMS\nfi' >> $script_path && \
     chmod +x $script_path
 
 # Setup the cron job to run the script
-RUN crontab -l > /tmp/mycron || true && \
-    echo "*/5 * * * * /cron_cpu.sh" >> /tmp/mycron && \
-    crontab /tmp/mycron && \
-    rm /tmp/mycron
+RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
 
 # Expose ports
 EXPOSE 8000 3000
