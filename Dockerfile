@@ -61,15 +61,15 @@ chmod=0700\n\
 nodaemon=true\n\
 user=root\n\
 \n\
-[program:cron]\n\
-command=cron -f\n\
-priority=1\n\
-autostart=true\n\
-autorestart=true\n\
-startretries=3\n\
-stdout_logfile=/var/log/supervisor/cron_out.log\n\
-stderr_logfile=/var/log/supervisor/cron_err.log\n\
-\n\
+# [program:cron]\n\
+# command=cron -f\n\
+# priority=1\n\
+# autostart=true\n\
+# autorestart=true\n\
+# startretries=3\n\
+# stdout_logfile=/var/log/supervisor/cron_out.log\n\
+# stderr_logfile=/var/log/supervisor/cron_err.log\n\
+# \n\
 [program:LumeCMS]\n\
 priority=10\n\
 autostart=true\n\
@@ -99,8 +99,8 @@ RUN script_path="/cron_cpu.sh" && \
     chmod +x $script_path
 
 
-# Setup the cron job to run the script
-RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
+# # Setup the cron job to run the script
+# RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
 
 # Expose ports
 EXPOSE 8000 3000
