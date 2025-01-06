@@ -16,9 +16,9 @@ const site = lume({
 site.data('cacheBusterVersion', '');
 
 site.data("site", {
-  title: "Frank Harris",
-  name: "hirefrank",
-  description: "Frank Harris's personal website.",
+  title: "Kids for Casa Buna",
+  name: "Kids for Casa Buna",
+  description: "Kids for Casa Buna is a non-profit organization that helps children in need.",
 });
 
 site.use(plugins());
