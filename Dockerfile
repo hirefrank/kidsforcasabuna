@@ -55,12 +55,16 @@ exec deno task production' > /usr/local/bin/setup-ssh.sh && chmod +x /usr/local/
 # Create supervisor configuration inline
 RUN echo "[supervisord]\n\
 nodaemon=true\n\
+user=root\n\
+\n\
 [program:cron]\n\
 command=cron -f\n\
+\n\
 [program:LumeCMS]\n\
 command=/usr/local/bin/setup-ssh.sh\n\
 stdout_logfile=/var/log/supervisor/LumeCMS.log\n\
 stderr_logfile=/var/log/supervisor/LumeCMS_err.log" > /etc/supervisor/conf.d/supervisord.conf
+
 
 # Create the CPU monitoring script
 RUN script_path="/cron_cpu.sh" && \
