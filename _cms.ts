@@ -1,12 +1,10 @@
 import lumeCMS from "lume/cms/mod.ts";
-import GitHub from "lume/cms/storage/github.ts";
-import { Octokit } from "npm:octokit";
+// import GitHub from "lume/cms/storage/github.ts";
+// import { Octokit } from "npm:octokit";
 
-const username = Deno.env.get("AUTH_USERNAME") || "admin";
-const password = Deno.env.get("AUTH_PASSWORD") || "demo";
-const gh_pat = Deno.env.get("GITHUB_PAT") || "";
-
-console.log(username, password, gh_pat);
+// const username = Deno.env.get("AUTH_USERNAME") || "admin";
+// const password = Deno.env.get("AUTH_PASSWORD") || "demo";
+// const gh_pat = Deno.env.get("GITHUB_PAT") || "";
 
 const cms = lumeCMS({
   site: {
@@ -17,22 +15,22 @@ const cms = lumeCMS({
     <p>Please note: Content updates may take up to 8 minutes to be visible on your live site.</p>
     `,
   },
-  auth: {
-    method: "basic",
-    users: {
-      [username]: password,
-    },
-  },
+  // auth: {
+  //   method: "basic",
+  //   users: {
+  //     [username]: password,
+  //   },
+  // },
 });
 
-cms.storage("gh",
-  new GitHub({
-    client: new Octokit({ auth: gh_pat }),
-    owner: "hirefrank",
-    repo: "kidsforcasabuna",
-    branch: "main",
-  })
-);
+// cms.storage("gh",
+//   new GitHub({
+//     client: new Octokit({ auth: gh_pat }),
+//     owner: "hirefrank",
+//     repo: "kidsforcasabuna",
+//     branch: "main",
+//   })
+// );
 
 cms.upload("images:Here you can manage all images of your posts","src:img");
 
