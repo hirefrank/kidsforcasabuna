@@ -1,66 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} - {{ site.name }}</title>
-    <link rel="stylesheet" href="{{ cacheBusterVersion }}/styles.css" />
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>{{ title }} - {{ site.name }}</title>
+   <link rel="stylesheet" href="{{ cacheBusterVersion }}/styles.css" />
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50">
-    <header class="bg-white shadow-sm">
-        <nav class="max-w-6xl mx-auto px-4 py-4">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                <a href="/" class="text-2xl font-bold text-primary-600">{{ site.name }}</a>
-                <div class="flex flex-col md:flex-row items-center gap-6">
-                    {{ for item of nav.main }}
-                    <a href="{{ item.url }}" class="text-gray-600 hover:text-gray-900">{{ item.title }}</a>
-                    {{ /for }}
-                    <a href="{{ site.donate_url }}" class="bg-primary-600 text-white px-6 py-2 rounded hover:bg-primary-700 transition-colors">
-                        Donate
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+<header class="bg-white shadow-sm">
+   <nav class="max-w-6xl mx-auto px-4 py-4">
+       <div class="flex justify-between items-center relative">
+           <a href="/" class="text-2xl font-bold text-blue-600">{{ site.name }}</a>
+           <button id="menu-toggle" class="md:hidden text-gray-600 focus:outline-none">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                   <path id="menu-icon" class="block" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                   <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+               </svg>
+           </button>
 
-    <main class="flex-grow">
-        {{ content }}
-    </main>
+           <!-- Desktop Navigation -->
+           <div class="hidden md:flex items-center space-x-8">
+               {{ for item of nav.main }}
+               <a href="{{ item.url }}" class="text-gray-600 hover:text-gray-900">{{ item.title }}</a>
+               {{ /for }}
+               <a href="{{ site.donate_url }}" class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors">Donate</a>
+           </div>
 
-    <footer class="bg-white mt-12 border-t border-gray-200">
-        <div class="max-w-6xl mx-auto px-4 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div>
-                    <h3 class="font-semibold text-gray-900 mb-4">Contact</h3>
-                    <div class="space-y-2 text-gray-600">
-                        <p><a href="/email">{{ site.contact.email }}</a></p>
-                        <p>{{ site.contact.phone }}</p>
-                    </div>
-                </div>
-                {{# <div>
-                    <h3 class="font-semibold text-gray-900 mb-4">Follow Us</h3>
-                    <div class="space-x-4">
-                        {{ for social of site.social }}
-                        <a href="{{ social.url }}" class="text-gray-600 hover:text-gray-900">
-                            {{ social.name }}
-                        </a>
-                        {{ /for }}
-                    </div>
-                </div> #}}
-                {{# <div>
-                    <h3 class="font-semibold text-gray-900 mb-4">Newsletter</h3>
-                    <form class="flex gap-2">
-                        <input type="email"
-                               placeholder="Enter your email"
-                               class="flex-grow px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
-                        <button type="submit"
-                                class="bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-700 transition-colors">
-                            Subscribe
-                        </button>
-                    </form>
-                </div> #}}
-            </div>
-        </div>
-    </footer>
+           <!-- Mobile Navigation -->
+           <div id="menu" class="absolute top-14 left-4 right-4 bg-white rounded-3xl shadow-lg md:hidden overflow-hidden transition-[max-height] duration-200 ease-in-out max-h-0">
+               <div class="flex flex-col p-6 space-y-4">
+                   {{ for item of nav.main }}
+                   <a href="{{ item.url }}" class="text-gray-600 hover:text-gray-900 px-2">{{ item.title }}</a>
+                   {{ /for }}
+                   <div class="px-2 pt-2">
+                       <a href="{{ site.donate_url }}" class="block bg-blue-600 text-white py-3 rounded-md text-center hover:bg-blue-700 transition-colors">Donate</a>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </nav>
+</header>
+
+   <main class="flex-grow">
+       {{ content }}
+   </main>
+
+   <footer class="bg-white mt-12 border-t border-gray-200">
+       <div class="max-w-6xl mx-auto px-4 py-12">
+           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+               <div>
+                   <h3 class="font-semibold text-gray-900 mb-4">Contact</h3>
+                   <div class="space-y-2 text-gray-600">
+                       <p><a href="/email">{{ site.contact.email }}</a></p>
+                       <p>{{ site.contact.phone }}</p>
+                   </div>
+               </div>
+               {{# <div>
+                   <h3 class="font-semibold text-gray-900 mb-4">Follow Us</h3>
+                   <div class="space-x-4">
+                       {{ for social of site.social }}
+                       <a href="{{ social.url }}" class="text-gray-600 hover:text-gray-900">
+                           {{ social.name }}
+                       </a>
+                       {{ /for }}
+                   </div>
+               </div> #}}
+               {{# <div>
+                   <h3 class="font-semibold text-gray-900 mb-4">Newsletter</h3>
+                   <form class="flex gap-2">
+                       <input type="email"
+                              placeholder="Enter your email"
+                              class="flex-grow px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-primary-500 focus:border-primary-500">
+                       <button type="submit"
+                               class="bg-primary-600 text-white px-4 py-2 rounded hover:bg-primary-700 transition-colors">
+                           Subscribe
+                       </button>
+                   </form>
+               </div> #}}
+           </div>
+       </div>
+   </footer>
+
+   <script>
+       document.getElementById('menu-toggle').addEventListener('click', function() {
+           const menu = document.getElementById('menu');
+           const menuIcon = document.getElementById('menu-icon');
+           const closeIcon = document.getElementById('close-icon');
+
+           if (menu.classList.contains('max-h-0')) {
+               menu.classList.remove('max-h-0');
+               menu.classList.add('max-h-96');
+               menuIcon.classList.add('hidden');
+               closeIcon.classList.remove('hidden');
+           } else {
+               menu.classList.remove('max-h-96');
+               menu.classList.add('max-h-0');
+               menuIcon.classList.remove('hidden');
+               closeIcon.classList.add('hidden');
+           }
+       });
+   </script>
 </body>
 </html>
