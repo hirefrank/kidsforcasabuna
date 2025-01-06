@@ -47,12 +47,12 @@ if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
     mkdir -p /root/.ssh\n\
     chmod 700 /root/.ssh\n\
     \n\
-    # Remove any potential "ssh-ed25519" prefix and create the key file\n\
-    echo "$SSH_PRIVATE_KEY" | sed "s/^ssh-ed25519 //g" > /root/.ssh/id_ed25519\n\
+    # Decode base64 and write the key\n\
+    echo "$SSH_PRIVATE_KEY" | base64 -d > /root/.ssh/id_ed25519\n\
     chmod 600 /root/.ssh/id_ed25519\n\
     \n\
-    # Explicitly write the full public key\n\
-    echo "ssh-ed25519 $SSH_PRIVATE_KEY root@container" > /root/.ssh/id_ed25519.pub\n\
+    # Generate public key\n\
+    ssh-keygen -y -f /root/.ssh/id_ed25519 > /root/.ssh/id_ed25519.pub\n\
     \n\
     echo "Contents of public key:"\n\
     cat /root/.ssh/id_ed25519.pub\n\
@@ -61,6 +61,7 @@ if [ ! -z "$SSH_PRIVATE_KEY" ]; then\n\
     ssh-keyscan -t rsa github.com >> /root/.ssh/known_hosts\n\
     \n\
     echo "Testing SSH connection to GitHub..."\n\
+    ssh-keygen -l -f /root/.ssh/id_ed25519\n\
     GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git || echo "GitHub SSH connection test failed"\n\
     \n\
     echo "Listing SSH directory contents:"\n\
