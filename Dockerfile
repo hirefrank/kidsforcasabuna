@@ -8,7 +8,7 @@ ARG GIT_REPO_URL="git@github.com:hirefrank/kidsforcasabuna.git"
 ARG TZ="America/New_York"
 
 # Install required packages
-RUN apt update -y && apt install -y git curl tzdata unzip openssh-client cron && \
+RUN apt update -y && apt install -y git curl tzdata unzip openssh-client cron supervisor procps && \
     rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # Set up Git configuration
@@ -38,28 +38,32 @@ RUN git init && \
     deno cache ./_cms.serve.ts && \
     deno cache ./_cms.lume.ts
 
-# Create entrypoint script
-RUN echo '#!/usr/bin/env bash\n\
-service cron start\n\
+# Inline entrypoint script
+RUN echo '#!/bin/sh\n\
+set -ex\n\
+# Check if cron is running, and start it if not\n\
+if ! pgrep cron > /dev/null; then\n\
+    echo "Starting cron service..."\n\
+    service cron start\n\
+else\n\
+    echo "Cron service is already running."\n\
+fi\n\
 \n\
 if [ -z "$SSH_PRIVATE_KEY" ]; then\n\
     echo "No SSH private key provided. Skipping SSH setup."\n\
     exit 1\n\
 fi\n\
 \n\
-mkdir -p /root/.ssh && chmod 700 /root/.ssh\n\
-echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
-chmod 600 /root/.ssh/id_ed25519\n\
-\n\
-echo "Testing SSH connection..."\n\
-if ! GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git; then\n\
-    echo "GitHub SSH connection test failed"\n\
-    exit 1\n\
+if [ -z "$SSH_PRIVATE_KEY" ]; then\n\
+    echo "No SSH private key provided. Proceeding without GitHub access."\n\
+else\n\
+    mkdir -p /root/.ssh && chmod 700 /root/.ssh\n\
+    echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_ed25519\n\
+    chmod 600 /root/.ssh/id_ed25519\n\
+    echo "Testing SSH connection..."\n\
+    GIT_SSH_COMMAND="ssh -v -i /root/.ssh/id_ed25519" git ls-remote git@github.com:hirefrank/kidsforcasabuna.git\n\
 fi\n\
-\n\
-echo "Starting application..."\n\
-exec deno task production' > /usr/local/bin/entrypoint.sh && \
-    chmod +x /usr/local/bin/entrypoint.sh
+exec deno task production' > /usr/local/bin/entrypoint.sh && chmod +x /usr/local/bin/entrypoint.sh
 
 # Create the CPU monitoring script
 RUN script_path="/cron_cpu.sh" && \
@@ -73,8 +77,8 @@ RUN script_path="/cron_cpu.sh" && \
     echo 'fi' >> $script_path && \
     chmod +x $script_path
 
-# Setup the cron job
-RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
+# # Setup the cron job to run the script
+# RUN echo "*/5 * * * * /cron_cpu.sh" | crontab -
 
 # Expose ports
 EXPOSE 8000 3000
