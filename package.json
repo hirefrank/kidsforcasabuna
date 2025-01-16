@@ -3,6 +3,6 @@
     "build": "deno task lume"
   },
   "devDependencies": {
-    "deno-bin": "^1.37.2"
+    "deno-bin": "^2.1.4"
   }
 }
