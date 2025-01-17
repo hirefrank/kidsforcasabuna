@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "build": "deno task lume"
-  },
-  "devDependencies": {
-    "deno-bin": "^2.1.4"
-  }
-}

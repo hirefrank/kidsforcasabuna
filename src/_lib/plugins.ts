@@ -7,6 +7,7 @@ import robots from "lume/plugins/robots.ts";
 import markdown from "lume/plugins/markdown.ts";
 import date from "lume/plugins/date.ts";
 import onDemand from "lume/plugins/on_demand.ts";
+import decapCMS from "lume/plugins/decap_cms.ts";
 
 import "lume/types.ts";
 
@@ -50,6 +51,9 @@ export default function () {
         },
       }))
       .use(onDemand())
+      .use(decapCMS({
+        identity: "netlify",
+      }))
       .copy("img", "./img");
   }
 }

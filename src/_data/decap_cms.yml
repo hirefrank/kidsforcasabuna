@@ -1,0 +1,95 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: src/img
+
+collections:
+  - label: Site Information
+    name: site
+    description: Manage your site's basic settings and general information
+    files:
+      - label: Site Information
+        file: src/_data/site.yaml
+        name: site_info
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Donate URL, name: donate_url, widget: string }
+          - label: Contact
+            name: contact
+            widget: object
+            fields:
+              - { label: Email, name: email, widget: string }
+              - { label: Phone, name: phone, widget: string }
+          - label: Social Links
+            name: social
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: URL, name: url, widget: string }
+
+  - label: Hero Content
+    name: hero
+    description: Update the main banner section displayed on your homepage
+    files:
+      - label: Hero Content
+        file: src/_data/hero.yaml
+        name: hero_content
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - label: CTA
+            name: cta
+            widget: object
+            fields:
+              - { label: Text, name: text, widget: string }
+              - { label: URL, name: url, widget: string }
+          - label: Secondary CTA
+            name: secondary_cta
+            widget: object
+            fields:
+              - { label: Text, name: text, widget: string }
+              - { label: URL, name: url, widget: string }
+
+  - label: About Us
+    name: about
+    description: Customize your organization's story and mission
+    files:
+      - label: About Content
+        file: src/about.md
+        name: about_content
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Body, name: body, widget: markdown }
+
+  - label: Initiatives
+    name: initiatives
+    description: Manage and update your program information and current projects
+    files:
+      - label: Initiatives Content
+        file: src/_data/initiatives.yaml
+        name: initiatives_content
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - label: Items
+            name: items
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: text }
+              - { label: Image, name: image, widget: image }
+
+  - label: Blog Posts
+    name: blog
+    description: Manage and edit your blog posts
+    folder: src/blog
+    create: true
+    fields:
+      - { label: Title, name: title, widget: string, required: true }
+      - { label: Author, name: author, widget: string, required: true, default: "Ionela Thomas" }
+      - { label: Excerpt, name: excerpt, widget: text, required: true }
+      - { label: Date, name: date, widget: datetime, required: true }
+      - { label: Body, name: body, widget: markdown }
+      - { label: Tags, name: tags, widget: list }
