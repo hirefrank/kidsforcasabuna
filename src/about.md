@@ -10,7 +10,7 @@ The Thomas siblings' connection to Romania runs deep. Each summer, they immerse 
 
 ## Our Mission
 
-We partner with [Casa Buna Charity in Bucharest](https://asociatiacasabuna.ro/) to provide vital resources to vulnerable children while fostering global youth leadership. Through our programs, young people across the United States engage in meaningful fundraising and cultural exchange with their Romanian peers.
+We raise money for NGOs that work with vulnerable children in Romania, such as [Casa Buna Charity in Bucharest, ](https://asociatiacasabuna.ro/)to provide vital resources to vulnerable children while fostering global youth leadership. Through our programs, young people across the United States engage in meaningful fundraising and cultural exchange with their Romanian peers.
 
 ## Join Our Journey
 
