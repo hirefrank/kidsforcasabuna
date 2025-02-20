@@ -1,13 +1,16 @@
 title: Our Initiatives
-description: >
-  Our work with <a href="https://www.facebook.com/share/r/1Dw1yWmxWo/?mibextid=UalRPS" class="link">Casa Buna Charity in Bucharest</a> channels youth energy into meaningful change. We connect American youth leaders with Romanian children, providing essential resources while fostering global citizenship. This dual approach ensures that both communities grow stronger - Casa Buna receives vital support while young American fundraisers develop leadership skills and cultural awareness.
+description: We connect American youth leaders with Romanian children, providing
+  essential resources while fostering global citizenship.
 items:
-  - title: Casa Buna Support
-    description: Our partnership with Casa Buna Charity in Bucharest provides vital resources to children in need.
+  - title: Romanian Support
+    description: We partner with NGOs in Bucharest to provide vital resources to
+      children in need.
     image: /img/casa-buna-support.png
   - title: Youth Leadership
-    description: We connect children across regions to develop leadership skills and global awareness.
+    description: We connect children across regions to develop leadership skills and
+      global awareness.
     image: /img/youth-leadership.png
   - title: Building Bridges
-    description: Our projects unite Romanian youth with peers worldwide, fostering empathy and cultural exchange.
+    description: Our projects unite Romanian youth with peers worldwide, fostering
+      empathy and cultural exchange.
     image: /img/building-bridges.png
