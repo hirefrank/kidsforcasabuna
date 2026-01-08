@@ -12,7 +12,7 @@ tags:
   - non-profit
   - children
 ---
-![](/img/whatsapp-image-2026-01-07-at-8.55.59-pm.jpeg)
+![](/img/whatsapp-image-2026-01-07-at-9.19.50-pm.jpeg)
 
 We made this program because our friend, Valeriu is in charge of Casa Buna; and I like Valeriu and Hannah a lot (Hannah is his wife)! 
 
