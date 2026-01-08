@@ -1,8 +1,10 @@
 ---
 title: A Note from Our Vice President
 author: Eric Thomas
-excerpt: '"I am Eric Thomas, Vice President of Kids for Casa Buna. We support
-  Casa Buna to help Roma kids learn to read, write, and have fun!'
+excerpt: >+
+  I am Eric Thomas A.K.A the Kids for Casa Buna Vice President. We support Casa
+  Buna to help Roma kids learn to read, write, and have fun!
+
 date: 2026-01-07T21:07:00.000Z
 tags:
   - youth empowerment
@@ -11,8 +13,6 @@ tags:
   - children
 ---
 ![](/src/img/whatsapp-image-2026-01-07-at-8.55.59-pm.jpeg)
-
-I am Eric Thomas A.K.A the Kids for Casa Buna Vice President. 
 
 We made this program because our friend, Valeriu is in charge of Casa Buna; and I like Valeriu and Hannah a lot (Hannah is his wife)! 
 
